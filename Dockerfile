@@ -1,5 +1,5 @@
-FROM alpine:latest
-LABEL org.opencontainers.image.authors="hiwanz <princeb4d@gmail.com>"
+FROM alpine:3.15
+LABEL org.shadowsocks-privoxy.image.authors="hiwanz <princeb4d@gmail.com>"
 
 #------------------------------------------------------------------------------
 # Environment setup:
@@ -7,12 +7,11 @@ LABEL org.opencontainers.image.authors="hiwanz <princeb4d@gmail.com>"
 
 RUN apk update && apk upgrade && \
   apk --no-cache add \
-      py-pip \
-      privoxy \
       git \
-  && rm /var/cache/apk/*
+      py3-pip \
+      privoxy
 
-RUN pip install git+https://github.com/shadowsocks/shadowsocks.git@master
+RUN pip3 install git+https://github.com/shadowsocks/shadowsocks.git@master
 
 #------------------------------------------------------------------------------
 # Environment variables:
