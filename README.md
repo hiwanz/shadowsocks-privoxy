@@ -1,14 +1,12 @@
 # shadowsocks-privoxy
 
-    shadowsocks client for socks5 proxy
-    privoxy for http proxy
+shadowsocks client for socks5 proxy, privoxy for http proxy, supports NAS like Synology.
 
 ## Image:
 
 ~~~
 docker pull hiwanz/shadowsocks-privoxy
 ~~~
-
 
 ## Run:
 
