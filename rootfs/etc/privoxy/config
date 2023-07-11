@@ -1,32 +1,64 @@
+# The directory where the other configuration files are located.
 confdir /etc/privoxy
+
+# The directory where all logging takes place (i.e. where the logfile is located).
 logdir /var/log/privoxy
 
-actionsfile match-all.action # Actions that are applied to all sites and maybe overruled later on.
-actionsfile default.action   # Main actions file
-actionsfile user.action      # User customizations
+# Actions that are applied to all sites and maybe overruled later on.
+actionsfile match-all.action
+# The default values are default.action, which is the "main" actions file maintained by the developers,
+# and user.action, where you can make your personal additions.
+#
+# Actions files contain all the per site and per URL configuration for ad blocking, cookie management, 
+# privacy considerations, etc.
+actionsfile default.action
+# User customizations
+actionsfile user.action
 
+# The filter files contain content modification rules that use regular expressions. These rules permit
+# powerful changes on the content of Web pages, and optionally the headers as well, e.g., you could try
+# to disable your favorite JavaScript annoyances, re-write the actual displayed text, or just have some
+# fun playing buzzword bingo with web pages.
+#
+# A pre-defined filter file called default.filter that contains a number of useful filters for common
+# problems is included in the distribution. 
 filterfile default.filter
-filterfile user.filter      # User customizations
+# User customizations
+filterfile user.filter
 
+# The log file to use
 logfile privoxy.log
+
+# The address and TCP port on which Privoxy will listen for client requests.
 listen-address :8118
-toggle  1
 
-enable-remote-toggle  0
-enable-remote-http-toggle  0
-enable-edit-actions 0
-enforce-blocks 0
-
-buffer-limit 4096
-enable-proxy-authentication-forwarding 0
-
-forward-socks5  / 127.0.0.1:7070  .
+# Through which SOCKS proxy specific requests should be routed.
+forward-socks5 / 127.0.0.1:7070 .
 forwarded-connect-retries  0
 
-accept-intercepted-requests 0
-allow-cgi-request-crunching 0
-split-large-forms 0
+# Number of seconds after which an open connection will no longer be reused.
 keep-alive-timeout 300
+
+# Privoxy currently doesn't pipeline outgoing requests, thus allowing pipelining on the client connection
+# is not guaranteed to improve the performance.
+# 
+# By default Privoxy tries to discourage clients from pipelining by discarding aggressively pipelined 
+# requests, which forces the client to resend them through a new connection.
+# 
+# This option lets Privoxy tolerate pipelining. Whether or not that improves performance mainly depends on
+# the client configuration.
+# 
+# If you are seeing problems with pages not properly loading, disabling this option could work around the
+# problem.
 tolerate-pipelining 1
+
+# Enabling this option significantly increases the number of connections that are reused, provided the
+# keep-alive-timeout option is also enabled.
+#
+# Enabling this option is therefore only recommended if the connection-sharing option is disabled.
+#
+# This option has no effect if Privoxy has been compiled without keep-alive support.
 default-server-timeout 60
+
+# Number of seconds after which a socket times out if no data is received.
 socket-timeout 300
