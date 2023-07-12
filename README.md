@@ -1,6 +1,6 @@
 # shadowsocks-privoxy
 
-shadowsocks client for socks5 proxy, privoxy for http proxy, supports NAS like Synology.
+shadowsocks client for socks5 proxy(port 7070), privoxy for http proxy(port 8118), supports NAS like Synology.
 
 ## Image:
 
